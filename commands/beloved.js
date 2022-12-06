@@ -5,7 +5,7 @@ module.exports = {
     .setName("beloved")
     .setDescription("Henri my beloved 😋")
     .setDMPermission(false),
-  aliases: ["belo"],
+  aliases: ["loved"],
   execute({ client: client, interaction: interaction }) {
     return interaction.reply(
       "https://media.discordapp.net/attachments/1025395705210216449/1049309004624572446/henrimybeloved.gif"

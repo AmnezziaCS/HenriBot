@@ -22,5 +22,5 @@ module.exports = async (client) => {
   await rest.put(Routes.applicationCommands(process.env.DISCORD_BOT_ID), {
     body: commands,
   });
-  console.log("Les commandes slash sont crées avec succés !");
+  console.log("Slash commands have been created successfully !");
 };
