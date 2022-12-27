@@ -21,4 +21,3 @@ client.events = new Collection();
 
 process.on("unhandledRejection", (e) => console.error(e));
 client.login(process.env.DISCORD_TOKEN);
-// ChocoBotDB

@@ -17,14 +17,14 @@ module.exports = async (client, interaction) => {
 
   if (!command)
     return interaction.reply(
-      "Quelque chose n'a pas tourné rond, bizarre. Soit votre commande n'existe pas, soit elle est erronée <:hmmmm:898672241787674634>"
+      "Quelque chose n'a pas tourné rond, bizarre. Soit votre commande n'existe pas, soit elle est erronée <:hmmmm:918094679302606878>"
     );
 
   try {
     await command.execute({ client, interaction });
   } catch (err) {
     interaction.reply(
-      "Quelque chose n'a pas tourné rond, bizarre. Soit votre commande n'existe pas, soit elle est erronée <:hmmmm:898672241787674634>"
+      "Quelque chose n'a pas tourné rond, bizarre. Soit votre commande n'existe pas, soit elle est erronée <:hmmmm:918094679302606878>"
     );
     console.log("Caught error:", err);
   }
