@@ -9,8 +9,8 @@
 ### Git clone :
 Before doing anything, you will have to get your local version of the bot (you will need both [nodeJS](https://nodejs.org/en/) and [git](https://git-scm.com/)). To do so :
 ```sh
-git clone https://github.com/amnezziaa/ChocoBot.git
-cd ./ChocoBot/
+git clone https://github.com/amnezziaa/HenriBot.git
+cd ./HenriBot/
 npm install
 ```
 ### Create your discord bot :
