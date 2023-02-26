@@ -1,4 +1,44 @@
+const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { google } = require("googleapis");
+const dateFormatter = require("../utils/dateFormatter");
+const authorize = require("../utils/googleAuthorize");
+
+const sheetStartingDate = new Date(process.env.SHEET_STARING_DATE);
+
+const nameTable = {
+  Henri: "B",
+  Pierre: "C",
+  Alexis: "D",
+  Amandine: "E",
+  Hugo: "F",
+  Mathys: "G",
+  Djibril: "H",
+};
+
+const challengeCompletedEmbed = (interaction) => {
+  return new EmbedBuilder()
+    .setColor("#dfeefc")
+    .setAuthor({
+      name: `Le Henri Challenge 🍩 est réussi !`,
+      iconURL: `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.jpeg`,
+    })
+    .setDescription(
+      `Bravo à ${interaction.options.getString("name")} pour avoir réussi le Henri Challenge <:peepobusiness:918125040388669440>`
+    );
+};
+
+const challengeFailedEmbed = (interaction) => {
+  return new EmbedBuilder()
+    .setColor("#dfeefc")
+    .setAuthor({
+      name: `Le Henri Challenge 🍩 est perdu !`,
+      iconURL: `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.jpeg`,
+    })
+    .setDescription(
+      `Dommage, ${interaction.options.getString("name")} n'a pas réussi le Henri Challenge aujourd'hui <:anger:928996461604143164>`
+    );
+};
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -32,10 +72,72 @@ module.exports = {
     .setDMPermission(false),
   aliases: ["challenge"],
   execute({ client: client, interaction: interaction }) {
-    var buffer =
-      interaction.options.getString("result") === "YES"
-        ? "Je note que le challenge est réussi <:peepoFlushed:918094710969597952>"
-        : "Je note que le challenge est échoué <:Sadge:920699839182954526>";
-    return interaction.reply({ content: buffer });
+    const daysDifference = Math.floor(
+      (new Date() - sheetStartingDate) / 86400000
+    );
+
+    async function alternateSheet(auth) {
+      const sheets = google.sheets({ version: "v4", auth });
+      const res = await sheets.spreadsheets.values.get({
+        spreadsheetId: process.env.SHEET_ID,
+        range: `!A2:A${2 + daysDifference}`,
+      });
+      const rows = res.data.values;
+
+      if (!rows || rows.length === 0) {
+        console.log("No data found.");
+        return;
+      }
+
+      const count = rows.length;
+      let bufferDay = new Date(rows[count - 1][0]);
+      const missingDays = daysDifference - count + 1; // +1 being the original day
+
+      for (i = 1; i < missingDays + 1; i++) {
+        bufferDay.setDate(bufferDay.getDate() + 1);
+        let values = [[dateFormatter(bufferDay)]];
+        let resource = {
+          values,
+        };
+
+        const dateSheetRes = await sheets.spreadsheets.values.append({
+          spreadsheetId: process.env.SHEET_ID,
+          range: `!A${i + count}`,
+          valueInputOption: "RAW",
+          resource,
+        });
+      }
+
+      let values =
+        interaction.options.getString("result") === "YES" ? [[""]] : [["x"]];
+      let resource = {
+        values,
+      };
+
+      let targetCell;
+      Object.entries(nameTable).every((entry) => {
+        if (entry[0].includes(interaction.options.getString("name"))) {
+          targetCell = entry[1];
+          return false;
+        }
+        return true;
+      });
+
+      const challengeResultRes = await sheets.spreadsheets.values.update({
+        spreadsheetId: process.env.SHEET_ID,
+        range: `!${targetCell}${2 + daysDifference}`,
+        valueInputOption: "RAW",
+        resource,
+      });
+    }
+
+    authorize().then(alternateSheet).catch(console.error);
+
+    return interaction.reply({
+      embeds:
+        interaction.options.getString("result") === "YES"
+          ? [challengeCompletedEmbed(interaction)]
+          : [challengeFailedEmbed(interaction)],
+    });
   },
 };
