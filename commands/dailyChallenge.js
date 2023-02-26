@@ -22,10 +22,12 @@ const challengeCompletedEmbed = (interaction) => {
     .setAuthor({
       name: `Le Henri Challenge 🍩 est réussi !`,
       iconURL: `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.jpeg`,
+      url: 'https://docs.google.com/spreadsheets/d/1_9VKhiAp9E4STmI9wpgV3mRElIXjzxhKiF9BlIiGNWM'
     })
     .setDescription(
       `Bravo à ${interaction.options.getString("name")} pour avoir réussi le Henri Challenge <:peepobusiness:918125040388669440>`
-    );
+    )
+    .addFields({ name: 'Statut de la sheet', value: 'La google sheet a bien été update ✅', inline: true });
 };
 
 const challengeFailedEmbed = (interaction) => {
@@ -34,10 +36,12 @@ const challengeFailedEmbed = (interaction) => {
     .setAuthor({
       name: `Le Henri Challenge 🍩 est perdu !`,
       iconURL: `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.jpeg`,
+      url: 'https://docs.google.com/spreadsheets/d/1_9VKhiAp9E4STmI9wpgV3mRElIXjzxhKiF9BlIiGNWM'
     })
     .setDescription(
       `Dommage, ${interaction.options.getString("name")} n'a pas réussi le Henri Challenge aujourd'hui <:anger:928996461604143164>`
-    );
+    )
+    .addFields({ name: 'Statut de la sheet', value: 'La google sheet a bien été update ✅', inline: true });
 };
 
 module.exports = {
