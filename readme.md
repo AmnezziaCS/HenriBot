@@ -7,7 +7,7 @@
 
 ## Setup
 ### Git clone :
-Before doing anything, you will have to get your local version of the bot (you will need both [nodeJS](https://nodejs.org/en/) and [git](https://git-scm.com/)). To do so :
+Before doing anything, you will have to get your local version of the bot (you will need both [nodeJS](https://nodejs.org/en/) and [git](https://git-scm.com/)). Then :
 ```sh
 git clone https://github.com/amnezziaa/HenriBot.git
 cd ./HenriBot/
@@ -17,13 +17,14 @@ npm install
 You can follow [this page](https://discordjs.guide/preparations/setting-up-a-bot-application.html) from the discord JS documentation.
 ### Create your google sheet app :
 You can follow [this tutorial](https://developers.google.com/sheets/api/quickstart/nodejs?hl=fr) from the google sheets API documentation.
+Don't forget to download your `credentials.json` file from the API and paste in in here.
 Note that later on when lauching the bot for the first time, you will be required to link an account. This is because the bot needs certain permissions to your account. But for this to work, you'll need to add your google mail to the OAuth consent screen of the app.
 ### Fill in the .env file
 You will need these **values** :
 - `DISCORD_BOT_ID` : From the [discord application](https://discord.com/developers/applications) page.
 - `DISCORD_TOKEN` : From the [discord application](https://discord.com/developers/applications) page.
 - `SHEET_ID` : The literal ID of your sheet URL.
-- `SHEET_STARING_DATE` : The date the sheet should start at.
+- `SHEET_STARING_DATE` : The date the sheet starts at, formats like : `YYYY/MM/DD`, value from the sheet and in `.env` should be identical.
 
 Once acquired, fill in the `example.env` file and rename it to `.env`.
 ### Final notice
