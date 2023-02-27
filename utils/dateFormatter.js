@@ -7,7 +7,7 @@ function dateFormatter(date) {
   var day = date.getDate().toString();
   day = day.length > 1 ? day : "0" + day;
 
-  return `${year}/${month}/${day} 00:00:00`;
+  return `${year}/${month}/${day}`;
 }
 
 module.exports = dateFormatter;

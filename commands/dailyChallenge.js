@@ -4,7 +4,7 @@ const { google } = require("googleapis");
 const dateFormatter = require("../utils/dateFormatter");
 const authorize = require("../utils/googleAuthorize");
 
-const sheetStartingDate = new Date(process.env.SHEET_STARING_DATE);
+const sheetStartingDate = new Date(`${process.env.SHEET_STARING_DATE} 00:00:00`);
 
 const nameTable = {
   Henri: "B",
@@ -80,7 +80,7 @@ module.exports = {
       (new Date() - sheetStartingDate) / 86400000
     );
 
-    async function alternateSheet(auth) {
+    async function alterateSheet(auth) {
       const sheets = google.sheets({ version: "v4", auth });
       const res = await sheets.spreadsheets.values.get({
         spreadsheetId: process.env.SHEET_ID,
@@ -94,7 +94,7 @@ module.exports = {
       }
 
       const count = rows.length;
-      let bufferDay = new Date(rows[count - 1][0]);
+      let bufferDay = new Date(`${rows[count - 1][0]} 00:00:00`);
       const missingDays = daysDifference - count + 1; // +1 being the original day
 
       for (i = 1; i < missingDays + 1; i++) {
@@ -135,7 +135,7 @@ module.exports = {
       });
     }
 
-    authorize().then(alternateSheet).catch(console.error);
+    authorize().then(alterateSheet).catch(console.error);
 
     return interaction.reply({
       embeds:
