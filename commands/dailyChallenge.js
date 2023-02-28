@@ -86,7 +86,7 @@ module.exports = {
       }
 
       const count = datesRows.length;
-      let bufferDay = new Date(`${rows[count - 1][0]} 00:00:00`);
+      let bufferDay = new Date(`${datesRows[count - 1][0]} 00:00:00`);
       const missingDays = daysDifference - count + 1; // +1 being the original day
 
       for (i = 1; i < missingDays + 1; i++) {
