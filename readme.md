@@ -17,8 +17,8 @@ npm install
 You can follow [this page](https://discordjs.guide/preparations/setting-up-a-bot-application.html) from the discord JS documentation.
 ### Create your google sheet app :
 You can follow [this tutorial](https://developers.google.com/sheets/api/quickstart/nodejs?hl=fr) from the google sheets API documentation.
-Don't forget to download your `credentials.json` file from the API and paste in in here.
-Note that later on when lauching the bot for the first time, you will be required to link an account. This is because the bot needs certain permissions to your account. But for this to work, you'll need to add your google mail to the OAuth consent screen of the app.
+Don't forget to download your `credentials.json` file from the API and paste in here.
+Note that later on when launching the bot for the first time, you will be required to link an account. This is because the bot needs certain permissions to your account. But for this to work, you'll need to add your google mail to the OAuth consent screen of the app.
 ### Fill in the .env file
 You will need these **values** :
 - `DISCORD_BOT_ID` : From the [discord application](https://discord.com/developers/applications) page.
@@ -30,7 +30,7 @@ Once acquired, fill in the `example.env` file and rename it to `.env`.
 ### Final notice
 **Keep in mind that the current setup only works because of my specific sheet organisation and values.**
 
-In fact, the commands are made in the way I designed the bot and google sheet in the first place. If you want the bot to work you way, you will have to either copy my entire sheet setup or create your own and therefore modify the code.
+In fact, the commands are made in the way I designed the bot and google sheet in the first place. If you want the bot to work your way, you will have to either copy my entire sheet setup or create your own and therefore modify the code.
 ## Documentation
 - [Chocobot repository - HenriBot started using the same architecture](https://github.com/amnezziaa/ChocoBot)
 ### Discord JS :
