@@ -5,7 +5,9 @@ const dateFormatter = require("../utils/dateFormatter");
 const getTargetCell = require("../utils/getTargetCell");
 const authorize = require("../utils/google/googleAuthorize");
 
-const sheetStartingDate = new Date(`${process.env.SHEET_STARING_DATE} 00:00:00`);
+const sheetStartingDate = new Date(
+  `${process.env.SHEET_STARING_DATE} 00:00:00`
+);
 
 const challengeCompletedEmbed = (interaction) => {
   return new EmbedBuilder()
@@ -13,12 +15,18 @@ const challengeCompletedEmbed = (interaction) => {
     .setAuthor({
       name: `Le Henri Challenge est réussi !`,
       iconURL: `https://media.istockphoto.com/id/538335769/fr/photo/beignet-avec-confettis-en-sucre-isol%C3%A9.jpg?s=612x612&w=0&k=20&c=5ABjKAsyFwFNflL6BhabjmsRod2X5ZZVMBpohEjh304=`,
-      url: 'https://docs.google.com/spreadsheets/d/1_9VKhiAp9E4STmI9wpgV3mRElIXjzxhKiF9BlIiGNWM'
+      url: "https://docs.google.com/spreadsheets/d/1_9VKhiAp9E4STmI9wpgV3mRElIXjzxhKiF9BlIiGNWM",
     })
     .setDescription(
-      `Bravo à ${interaction.options.getString("name")} pour avoir réussi le Henri Challenge !`
+      `Bravo à ${interaction.options.getString(
+        "name"
+      )} pour avoir réussi le Henri Challenge !`
     )
-    .addFields({ name: 'Statut de la sheet', value: 'La google sheet a bien été update ✅', inline: true });
+    .addFields({
+      name: "Statut de la sheet",
+      value: "La google sheet a bien été update ✅",
+      inline: true,
+    });
 };
 
 const challengeFailedEmbed = (interaction) => {
@@ -27,12 +35,18 @@ const challengeFailedEmbed = (interaction) => {
     .setAuthor({
       name: `Le Henri Challenge est perdu !`,
       iconURL: `https://media.istockphoto.com/id/538335769/fr/photo/beignet-avec-confettis-en-sucre-isol%C3%A9.jpg?s=612x612&w=0&k=20&c=5ABjKAsyFwFNflL6BhabjmsRod2X5ZZVMBpohEjh304=`,
-      url: 'https://docs.google.com/spreadsheets/d/1_9VKhiAp9E4STmI9wpgV3mRElIXjzxhKiF9BlIiGNWM'
+      url: "https://docs.google.com/spreadsheets/d/1_9VKhiAp9E4STmI9wpgV3mRElIXjzxhKiF9BlIiGNWM",
     })
     .setDescription(
-      `Dommage, ${interaction.options.getString("name")} n'a pas réussi le Henri Challenge aujourd'hui !`
+      `Dommage, ${interaction.options.getString(
+        "name"
+      )} n'a pas réussi le Henri Challenge aujourd'hui !`
     )
-    .addFields({ name: 'Statut de la sheet', value: 'La google sheet a bien été update ✅', inline: true });
+    .addFields({
+      name: "Statut de la sheet",
+      value: "La google sheet a bien été update ✅",
+      inline: true,
+    });
 };
 
 module.exports = {
@@ -60,8 +74,9 @@ module.exports = {
         .setDescription("Le résultat du challenge.")
         .setRequired(true)
         .addChoices(
-          { name: "Réussi", value: "YES" },
-          { name: "Perdu", value: "NO" }
+          { name: "Rien", value: "O" },
+          { name: "Donuts classiques 1,60€", value: "C" },
+          { name: "Donuts fins 1€", value: "S" }
         )
     )
     .setDMPermission(false),
@@ -104,8 +119,10 @@ module.exports = {
         });
       }
 
-      const challengeOutcomeValues =
-        interaction.options.getString("result") === "YES" ? [[""]] : [["x"]];
+      const challengeOutcome = interaction.options.getString("result");
+      const challengeOutcomeValues = [
+        [challengeOutcome === "O" ? "" : challengeOutcome],
+      ];
       let challengeOutcomeResource = {
         values: challengeOutcomeValues,
       };
@@ -122,7 +139,7 @@ module.exports = {
 
     return interaction.reply({
       embeds:
-        interaction.options.getString("result") === "YES"
+        interaction.options.getString("result") === "O"
           ? [challengeCompletedEmbed(interaction)]
           : [challengeFailedEmbed(interaction)],
     });
