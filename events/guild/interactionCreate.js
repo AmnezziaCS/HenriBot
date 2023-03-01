@@ -1,10 +1,8 @@
-const newDate = require("../../utils/newDate");
-
 module.exports = async (client, interaction) => {
   if (!interaction.type === "APPLICATION_COMMAND") return;
 
   console.log(
-    `${newDate(new Date())}${interaction.user.username}#${
+    `${new Date().toLocaleString()} ${interaction.user.username}#${
       interaction.user.discriminator
     } : /${interaction.commandName}`
   );
