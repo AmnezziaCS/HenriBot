@@ -4,7 +4,8 @@ const authorize = require("../utils/google/googleAuthorize");
 const getTargetCell = require("../utils/getTargetCell");
 const getFailedChallenges = require("../utils/google/getFailedChallenges");
 
-const donutPrice = 160; // using the divide by 100 method for currency
+const classicDonutPrice = 160; // using the divide by 100 method for currency
+const smallDonutPrice = 100;
 const sheetStartingDate = new Date(
   `${process.env.SHEET_STARING_DATE} 00:00:00`
 );
@@ -25,7 +26,9 @@ const moneySpentEmbed = (interaction, totalPrice) => {
           ? interaction.options.getString("name") != "Amandine"
             ? "0€ quel boss"
             : "0€ quelle bosse"
-          : `${totalPrice.toFixed(2)}€, dommage, le Henri Challenge fait vraiment des ravages...`
+          : `${totalPrice.toFixed(
+              2
+            )}€, dommage, le Henri Challenge fait vraiment des ravages...`
       }`
     );
 };
@@ -65,7 +68,9 @@ module.exports = {
       daysDifference
     ).catch(console.error);
 
-    const totalPrice = (totalFails * donutPrice) / 100;
+    const totalPrice =
+      (totalFails.classic * classicDonutPrice) / 100 +
+      (totalFails.small * smallDonutPrice) / 100;
 
     return interaction.reply({
       embeds: [moneySpentEmbed(interaction, totalPrice)],
