@@ -61,7 +61,6 @@ module.exports = {
         .addChoices(
           { name: "Henri", value: "Henri" },
           { name: "Pierre", value: "Pierre" },
-          { name: "Alexis", value: "Alexis" },
           { name: "Amandine", value: "Amandine" },
           { name: "Hugo", value: "Hugo" },
           { name: "Mathys", value: "Mathys" },

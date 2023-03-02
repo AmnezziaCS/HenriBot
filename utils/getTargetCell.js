@@ -1,11 +1,10 @@
 const nameTable = {
   Henri: "B",
   Pierre: "C",
-  Alexis: "D",
-  Amandine: "E",
-  Hugo: "F",
-  Mathys: "G",
-  Djibril: "H",
+  Amandine: "D",
+  Hugo: "E",
+  Mathys: "F",
+  Djibril: "G",
 };
 
 const getTargetCell = (interaction) => {
