@@ -11,7 +11,8 @@ async function getFailedChallenges(auth, targetCell, daysDifference) {
   const rows = response.data.values;
   let totalFails = {
     classic: 0,
-    small: 0
+    small: 0,
+    milka: 0
   }
 
   if (!rows || rows.length === 0) {
@@ -24,6 +25,9 @@ async function getFailedChallenges(auth, targetCell, daysDifference) {
     }
     if (value[0] === "S") {
       return totalFails.small++;
+    }
+    if (value[0] === "M") {
+      return totalFails.milka++;
     }
   });
   return totalFails;

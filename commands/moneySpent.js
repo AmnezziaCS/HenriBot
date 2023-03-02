@@ -4,8 +4,12 @@ const authorize = require("../utils/google/googleAuthorize");
 const getTargetCell = require("../utils/getTargetCell");
 const getFailedChallenges = require("../utils/google/getFailedChallenges");
 
-const classicDonutPrice = 160; // using the divide by 100 method for currency
-const smallDonutPrice = 100;
+// Using the divide by 100 method for currency
+const donutPrices = {
+  classicDonutPrice: 160,
+  smallDonutPrice: 100,
+  milkaDonutPrice: 290,
+}
 const sheetStartingDate = new Date(
   `${process.env.SHEET_STARING_DATE} 00:00:00`
 );
@@ -69,8 +73,9 @@ module.exports = {
     ).catch(console.error);
 
     const totalPrice =
-      (totalFails.classic * classicDonutPrice) / 100 +
-      (totalFails.small * smallDonutPrice) / 100;
+      (totalFails.classic * donutPrices.classicDonutPrice) / 100 +
+      (totalFails.small * donutPrices.smallDonutPrice) / 100 +
+      (totalFails.milka * donutPrices.milkaDonutPrice) / 100;
 
     return interaction.reply({
       embeds: [moneySpentEmbed(interaction, totalPrice)],
