@@ -9,7 +9,8 @@ const donutPrices = {
   classicDonutPrice: 160,
   smallDonutPrice: 100,
   milkaDonutPrice: 290,
-}
+  chocoBeignetPrice: 360,
+};
 const sheetStartingDate = new Date(
   `${process.env.SHEET_STARING_DATE} 00:00:00`
 );
@@ -74,7 +75,8 @@ module.exports = {
     const totalPrice =
       (totalFails.classic * donutPrices.classicDonutPrice) / 100 +
       (totalFails.small * donutPrices.smallDonutPrice) / 100 +
-      (totalFails.milka * donutPrices.milkaDonutPrice) / 100;
+      (totalFails.milka * donutPrices.milkaDonutPrice) / 100 +
+      (totalFails.beignet * donutPrices.chocoBeignetPrice) / 100;
 
     return interaction.reply({
       embeds: [moneySpentEmbed(interaction, totalPrice)],

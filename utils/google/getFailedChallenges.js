@@ -12,8 +12,9 @@ async function getFailedChallenges(auth, targetCell, daysDifference) {
   let totalFails = {
     classic: 0,
     small: 0,
-    milka: 0
-  }
+    milka: 0,
+    beignet: 0,
+  };
 
   if (!rows || rows.length === 0) {
     console.log("No challenges failed.");
@@ -28,6 +29,9 @@ async function getFailedChallenges(auth, targetCell, daysDifference) {
     }
     if (value[0] === "M") {
       return totalFails.milka++;
+    }
+    if (value[0] === "B") {
+      return totalFails.beignet++;
     }
   });
   return totalFails;
