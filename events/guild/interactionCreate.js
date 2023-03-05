@@ -1,10 +1,14 @@
 module.exports = async (client, interaction) => {
   if (!interaction.type === "APPLICATION_COMMAND") return;
 
+  let parameterBuffer = "";
+  interaction.options._hoistedOptions.forEach((parameter) => {
+    parameterBuffer += ` [${parameter.name}: ${parameter.value}]`;
+  });
   console.log(
     `${new Date().toLocaleString()} ${interaction.user.username}#${
       interaction.user.discriminator
-    } : /${interaction.commandName}`
+    } : /${interaction.commandName}${parameterBuffer}`
   );
 
   const command =
