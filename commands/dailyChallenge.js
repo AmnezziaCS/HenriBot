@@ -77,7 +77,8 @@ module.exports = {
           { name: "Donuts classiques 1,60€", value: "C" },
           { name: "Donuts fins 1€", value: "S" },
           { name: "Donut milka 2,90€", value: "M" },
-          { name: "Beignets choco 3,60€", value: "B" }
+          { name: "Beignets choco x4 3,00€", value: "B4" },
+          { name: "Beignets choco x10 3,60€", value: "B10" }
         )
     )
     .setDMPermission(false),

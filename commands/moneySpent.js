@@ -2,14 +2,15 @@ const { EmbedBuilder } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const authorize = require("../utils/google/googleAuthorize");
 const getTargetCell = require("../utils/getTargetCell");
-const getFailedChallenges = require("../utils/google/getFailedChallenges");
+const getFailedChallenges = require("../utils/getFailedChallenges");
 
 // Using the divide by 100 method for currency
 const donutPrices = {
   classicDonutPrice: 160,
   smallDonutPrice: 100,
   milkaDonutPrice: 290,
-  chocoBeignetPrice: 360,
+  chocoBeignet4Price: 300,
+  chocoBeignet10Price: 360,
 };
 const sheetStartingDate = new Date(
   `${process.env.SHEET_STARING_DATE} 00:00:00`
@@ -76,7 +77,8 @@ module.exports = {
       (totalFails.classic * donutPrices.classicDonutPrice) / 100 +
       (totalFails.small * donutPrices.smallDonutPrice) / 100 +
       (totalFails.milka * donutPrices.milkaDonutPrice) / 100 +
-      (totalFails.beignet * donutPrices.chocoBeignetPrice) / 100;
+      (totalFails.beignet4 * donutPrices.chocoBeignet4Price) / 100 +
+      (totalFails.beignet10 * donutPrices.chocoBeignet10Price) / 100;
 
     return interaction.reply({
       embeds: [moneySpentEmbed(interaction, totalPrice)],
