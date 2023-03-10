@@ -13,7 +13,8 @@ async function getFailedChallenges(auth, targetCell, daysDifference) {
     classic: 0,
     small: 0,
     milka: 0,
-    beignet: 0,
+    beignet4: 0,
+    beignet10: 0,
   };
 
   if (!rows || rows.length === 0) {
@@ -30,8 +31,11 @@ async function getFailedChallenges(auth, targetCell, daysDifference) {
     if (value[0] === "M") {
       return totalFails.milka++;
     }
-    if (value[0] === "B") {
-      return totalFails.beignet++;
+    if (value[0] === "B4") {
+      return totalFails.beignet4++;
+    }
+    if (value[0] === "B10") {
+      return totalFails.beignet10++;
     }
   });
   return totalFails;
