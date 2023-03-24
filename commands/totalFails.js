@@ -56,13 +56,12 @@ module.exports = {
     .setDMPermission(false),
   aliases: ["fails"],
   async execute({ client: client, interaction: interaction }) {
+    const auth = await authorize();
+    const targetCell = getTargetCell(interaction);
     const daysDifference = Math.floor(
       (new Date() - sheetStartingDate) / 86400000
     );
-    const targetCell = getTargetCell(interaction);
-
-    const auth = await authorize();
-
+    
     const totalFailsObject = await getFailedChallenges(
       auth,
       targetCell,

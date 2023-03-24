@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const authorize = require("../utils/google/googleAuthorize");
 const getTargetCell = require("../utils/getTargetCell");
 const getFailedChallenges = require("../utils/getFailedChallenges");
+const countWeekendDays = require("../utils/countWeekendDays");
 
 const sheetStartingDate = new Date(
   `${process.env.SHEET_STARING_DATE} 00:00:00`
@@ -55,12 +56,11 @@ module.exports = {
     )
     .setDMPermission(false),
   async execute({ client: client, interaction: interaction }) {
+    const auth = await authorize();
+    const targetCell = getTargetCell(interaction);
     const daysDifference = Math.floor(
       (new Date() - sheetStartingDate) / 86400000
     );
-    const targetCell = getTargetCell(interaction);
-
-    const auth = await authorize();
 
     const totalFailsObject = await getFailedChallenges(
       auth,
@@ -73,7 +73,7 @@ module.exports = {
       0
     );
 
-    const failRatio = ((totalFails / daysDifference) * 100).toFixed(2);
+    const failRatio = ((totalFails / (daysDifference - countWeekendDays(sheetStartingDate, new Date()))) * 100).toFixed(2);
 
     return interaction.reply({
       embeds: [failRatioEmbed(interaction, failRatio)],
