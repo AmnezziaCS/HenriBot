@@ -4,7 +4,6 @@ const nameTable = {
   Amandine: "D",
   Hugo: "E",
   Mathys: "F",
-  Djibril: "G",
 };
 
 const getTargetCell = (interaction) => {
