@@ -15,7 +15,7 @@ Before doing anything, you will have to get your local version of the bot (you w
 ```sh
 git clone https://github.com/amnezziaa/HenriBot.git
 cd ./HenriBot/
-npm install
+npm ci
 ```
 
 ### Create your discord bot
