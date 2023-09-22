@@ -1,20 +1,21 @@
-const { google } = require("googleapis");
-const fs = require("fs").promises;
-const path = require("path");
+import { google } from "googleapis";
+import { promises as fs } from "fs";
+import path from "path";
+import { OAuth2Client } from "google-auth-library";
+
+// File provided by Google API documentation.
 
 const TOKEN_PATH = path.join(process.cwd(), "token.json");
 const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
 
 /**
  * Reads previously authorized credentials from the save file.
- *
- * @return {Promise<OAuth2Client|null>}
  */
-async function loadSavedCredentialsIfExist() {
+export const loadSavedCredentialsIfExist = async (): Promise<OAuth2Client | null> => {
   try {
     const content = await fs.readFile(TOKEN_PATH);
-    const credentials = JSON.parse(content);
-    return google.auth.fromJSON(credentials);
+    const credentials = JSON.parse(content as any);
+    return google.auth.fromJSON(credentials) as OAuth2Client;
   } catch (err) {
     return null;
   }
@@ -22,13 +23,10 @@ async function loadSavedCredentialsIfExist() {
 
 /**
  * Serializes credentials to a file compatible with GoogleAUth.fromJSON.
- *
- * @param {OAuth2Client} client
- * @return {Promise<void>}
  */
-async function saveCredentials(client) {
+export const saveCredentials = async (client: OAuth2Client): Promise<void> => {
   const content = await fs.readFile(CREDENTIALS_PATH);
-  const keys = JSON.parse(content);
+  const keys = JSON.parse(content as any);
   const key = keys.installed || keys.web;
   const payload = JSON.stringify({
     type: "authorized_user",
@@ -38,5 +36,3 @@ async function saveCredentials(client) {
   });
   await fs.writeFile(TOKEN_PATH, payload);
 }
-
-module.exports = { loadSavedCredentialsIfExist, saveCredentials };

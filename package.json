@@ -2,9 +2,10 @@
   "name": "henribot",
   "version": "1.0.0",
   "description": "A bot that tracks Henri Challenge",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch src/main.ts"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +13,11 @@
     "@google-cloud/local-auth": "^2.1.0",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
-    "googleapis": "^105.0.0"
+    "googleapis": "^105.0.0",
+    "tsx": "^3.12.10",
+    "zod": "^3.22.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }

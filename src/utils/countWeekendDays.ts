@@ -1,4 +1,4 @@
-function countWeekendDays(startDate, endDate) {
+export const countWeekendDays = (startDate: Date, endDate: Date) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
   let count = 0;
@@ -13,5 +13,3 @@ function countWeekendDays(startDate, endDate) {
 
   return count;
 }
-
-module.exports = countWeekendDays;

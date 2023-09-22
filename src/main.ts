@@ -1,6 +1,6 @@
-require("dotenv").config();
-
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
+import { Client, Collection, GatewayIntentBits } from "discord.js";
+import { ENV } from "./env";
+import * as handlers from "./handlers"; 
 
 const client = new Client({
   intents: [
@@ -13,11 +13,7 @@ const client = new Client({
 client.commands = new Collection();
 client.events = new Collection();
 
-["command_handler", "event_handler", "slash_command_handler"].forEach(
-  (handler) => {
-    require(`./handlers/${handler}`)(client);
-  }
-);
+Object.values(handlers).forEach((handler) => handler(client));
 
 process.on("unhandledRejection", (e) => console.error(e));
-client.login(process.env.DISCORD_TOKEN);
+client.login(ENV.DISCORD_TOKEN);

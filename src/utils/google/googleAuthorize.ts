@@ -1,9 +1,12 @@
-const { authenticate } = require("@google-cloud/local-auth");
-const {
+import { authenticate } from "@google-cloud/local-auth";
+import {
   loadSavedCredentialsIfExist,
   saveCredentials,
-} = require("./googleCredentialsManager");
-const path = require("path");
+} from "./googleCredentialsManager";
+import path from "path";
+import { OAuth2Client } from "google-auth-library";
+
+// File provided by Google API documentation.
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
@@ -11,7 +14,7 @@ const CREDENTIALS_PATH = path.join(process.cwd(), "credentials.json");
 
 // Load or request or authorization to call APIs.
 
-async function authorize() {
+export const authorize = async (): Promise<OAuth2Client> => {
   let client = await loadSavedCredentialsIfExist();
   if (client) {
     return client;
@@ -24,6 +27,4 @@ async function authorize() {
     await saveCredentials(client);
   }
   return client;
-}
-
-module.exports = authorize;
+};

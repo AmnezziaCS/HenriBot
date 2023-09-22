@@ -9,3 +9,7 @@ token.json
 # Node modules
 
 node_modules/
+
+# Build folder
+
+dist/

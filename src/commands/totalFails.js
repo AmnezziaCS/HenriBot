@@ -3,9 +3,10 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const authorize = require("../utils/google/googleAuthorize");
 const getTargetCell = require("../utils/getTargetCell");
 const getFailedChallenges = require("../utils/getFailedChallenges");
+const ENV = require("../utils/env");
 
 const sheetStartingDate = new Date(
-  `${process.env.SHEET_STARING_DATE} 00:00:00`
+  `${ENV.SHEET_STARING_DATE} 00:00:00`
 );
 
 const voyelArray = ["a", "e", "i", "o", "u"];
@@ -35,7 +36,7 @@ const totalFailEmbed = (interaction, totalFails) => {
     );
 };
 
-module.exports = {
+export const totalFails = {
   data: new SlashCommandBuilder()
     .setName("totalfails")
     .setDescription("Donne le total de fail par personne !")
