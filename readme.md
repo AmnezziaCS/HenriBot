@@ -10,10 +10,10 @@
 
 ### Git clone
 
-Before doing anything, you will have to get your local version of the bot (you will need both [nodeJS](https://nodejs.org/en/) and [git](https://git-scm.com/)). Then :
+Before doing anything, you will have to get your local version of the bot (you will need both [nodeJS](https://nodejs.org/en/) and [git](https://git-scm.com/)). Then:
 
 ```sh
-git clone https://github.com/amnezziaa/HenriBot.git
+git clone https://github.com/AmnezziaCS/HenriBot.git
 cd ./HenriBot/
 npm ci
 ```
@@ -30,7 +30,7 @@ Note that later on when launching the bot for the first time, you will be requir
 
 ### Fill in the .env file
 
-You will need these **values** :
+You will need these **values**:
 
 - `DISCORD_BOT_ID` : From the [discord application](https://discord.com/developers/applications) page.
 - `DISCORD_TOKEN` : From the [discord application](https://discord.com/developers/applications) page.
